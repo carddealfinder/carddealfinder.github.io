@@ -70,7 +70,7 @@ This site hosts the documentation and OAuth redirect pages only — not the full
 
 If you have questions, suggestions, or partnership inquiries:
 
-**Email:** carddealfinder86@gmail.com  
+**Email:** srmichael86@gmail.com  
 **GitHub:** https://github.com/carddealfinder  
 
 ---
