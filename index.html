@@ -1,17 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Card Deal Finder</title>
-  <meta charset="UTF-8">
-  <style>
-    body { font-family: Arial; text-align: center; padding: 60px; }
-    h1 { color: #333; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Deal Finder</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        img.logo {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #0066ff, #00bbff);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 720px;
+            margin: auto;
+            line-height: 1.5;
+        }
+
+        .section {
+            padding: 50px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        footer a { color: #00aaff; text-decoration: none; }
+    </style>
 </head>
 <body>
-  <h1>Card Deal Finder</h1>
-  <img src="logo.png" alt="Card Deal Finder Logo" style="width: 220px; display:block; margin: 20px auto;">
-  <p>A tool for analyzing and discovering undervalued sports card listings.</p>
-  <p>This site hosts the privacy policy and authorization pages required for eBay API usage.</p>
+
+<header>
+    <img src="logo.png" alt="Card Deal Finder Logo" class="logo">
+    <nav>
+        <a href="/">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="auth-success.html">Auth Success</a>
+        <a href="auth-denied.html">Auth Denied</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Find the Best Deals on Sports Cards — Instantly</h1>
+    <p>Card Deal Finder analyzes live eBay market data to help collectors discover undervalued cards, trending players, and real-time pricing opportunities.</p>
+</section>
+
+<section class="section">
+    <h2>What Card Deal Finder Does</h2>
+
+    <div class="features">
+        <div class="feature-box">
+            <h3>📊 Real-Time Pricing</h3>
+            <p>Search millions of active listings and instantly compare prices across the sports card market.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🔍 Market Insights</h3>
+            <p>Track pricing trends, see historical patterns, and identify cards that are currently undervalued.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>⚡ Fast & Easy</h3>
+            <p>Simply search a player or card type — the system does the rest automatically.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>🤝 Collector Focused</h3>
+            <p>Built by collectors, for collectors. No ads, no clutter — just clean pricing data.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Why This Matters to eBay</h2>
+    <p>
+        Card Deal Finder is an analytical tool that reads publicly available listing data to provide collectors 
+        with improved pricing transparency. It does not automate bidding, buying, or posting listings. 
+        It simply enhances buyer understanding of market conditions — improving the overall eBay buying experience.
+    </p>
+</section>
+
+<footer>
+    © <script>document.write(new Date().getFullYear());</script> Card Deal Finder  
+    • <a href="https://carddealfinder.github.io">Visit Website</a>
+</footer>
+
 </body>
 </html>
