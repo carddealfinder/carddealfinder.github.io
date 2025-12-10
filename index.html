@@ -1,148 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Card Deal Finder</title>
+
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f8;
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            padding: 0;
         }
 
         header {
-            background: white;
+            background: #1e1e2f;
+            color: white;
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        img.logo {
-            width: 200px;
-            margin-bottom: 10px;
-        }
-
-        nav a {
-            margin: 0 15px;
-            color: #0077cc;
-            text-decoration: none;
+            font-size: 26px;
             font-weight: bold;
         }
 
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #0066ff, #00bbff);
+        #search-box {
+            max-width: 600px;
+            margin: 20px auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        #query-input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        #search-btn {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
             color: white;
+            cursor: pointer;
         }
 
-        .hero h1 {
-            font-size: 44px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 20px;
-            max-width: 720px;
-            margin: auto;
-            line-height: 1.5;
-        }
-
-        .section {
-            padding: 50px 20px;
+        #results {
             max-width: 900px;
-            margin: auto;
+            margin: 20px auto;
         }
 
-        .section h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 30px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-box {
+        .card {
             background: white;
-            padding: 25px;
+            padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
-        footer {
-            background: #222;
-            color: #aaa;
-            text-align: center;
-            padding: 25px;
-            margin-top: 40px;
+        .deal-score {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 6px;
+            display: inline-block;
         }
 
-        footer a { color: #00aaff; text-decoration: none; }
+        .deal-good { background: #4CAF50; color: white; }
+        .deal-mid  { background: #FFC107; color: black; }
+        .deal-bad  { background: #F44336; color: white; }
     </style>
 </head>
+
 <body>
 
 <header>
-    <img src="logo.png" alt="Card Deal Finder Logo" class="logo">
-    <nav>
-        <a href="/">Home</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="auth-success.html">Auth Success</a>
-        <a href="auth-denied.html">Auth Denied</a>
-    </nav>
+    Card Deal Finder 🔍
 </header>
 
-<section class="hero">
-    <h1>Find the Best Deals on Sports Cards — Instantly</h1>
-    <p>Card Deal Finder analyzes live eBay market data to help collectors discover undervalued cards, trending players, and real-time pricing opportunities.</p>
-</section>
+<div id="search-box">
+    <input id="query-input" type="text" placeholder="Search card (e.g. '2020 Prizm Silver Rookie')" />
+    <button id="search-btn">Search</button>
+</div>
 
-<section class="section">
-    <h2>What Card Deal Finder Does</h2>
+<div id="results"></div>
 
-    <div class="features">
-        <div class="feature-box">
-            <h3>📊 Real-Time Pricing</h3>
-            <p>Search millions of active listings and instantly compare prices across the sports card market.</p>
-        </div>
+<script>
+    async function searchCards() {
+        const query = document.getElementById("query-input").value.trim();
+        if (!query) return;
 
-        <div class="feature-box">
-            <h3>🔍 Market Insights</h3>
-            <p>Track pricing trends, see historical patterns, and identify cards that are currently undervalued.</p>
-        </div>
+        document.getElementById("results").innerHTML = "<p>Loading…</p>";
 
-        <div class="feature-box">
-            <h3>⚡ Fast & Easy</h3>
-            <p>Simply search a player or card type — the system does the rest automatically.</p>
-        </div>
+        const url = `http://127.0.0.1:5000/search?q=${encodeURIComponent(query)}`;
 
-        <div class="feature-box">
-            <h3>🤝 Collector Focused</h3>
-            <p>Built by collectors, for collectors. No ads, no clutter — just clean pricing data.</p>
-        </div>
-    </div>
-</section>
+        const response = await fetch(url);
+        const data = await response.json();
 
-<section class="section">
-    <h2>Why This Matters to eBay</h2>
-    <p>
-        Card Deal Finder is an analytical tool that reads publicly available listing data to provide collectors 
-        with improved pricing transparency. It does not automate bidding, buying, or posting listings. 
-        It simply enhances buyer understanding of market conditions — improving the overall eBay buying experience.
-    </p>
-</section>
+        renderResults(data);
+    }
 
-<footer>
-    © <script>document.write(new Date().getFullYear());</script> Card Deal Finder  
-    • <a href="https://carddealfinder.github.io">Visit Website</a>
-</footer>
+    function getDealClass(score) {
+        if (score >= 70) return "deal-good";
+        if (score >= 40) return "deal-mid";
+        return "deal-bad";
+    }
+
+    function renderResults(data) {
+        const container = document.getElementById("results");
+        container.innerHTML = "";
+
+        data.results.forEach(item => {
+            const dealClass = getDealClass(item.deal_score);
+
+            container.innerHTML += `
+                <div class="card">
+                    <h3>${item.title}</h3>
+                    <p><strong>Price:</strong> $${item.price}</p>
+                    <p><strong>Source:</strong> ${item.source}</p>
+                    <p>
+                        <span class="deal-score ${dealClass}">
+                            Deal Score: ${item.deal_score}
+                        </span>
+                    </p>
+                    <a href="${item.url}" target="_blank">View Item</a>
+                </div>
+            `;
+        });
+    }
+
+    document.getElementById("search-btn").addEventListener("click", searchCards);
+
+    document.getElementById("query-input").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") searchCards();
+    });
+</script>
 
 </body>
 </html>
